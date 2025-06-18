@@ -1,0 +1,13 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Navbar = () => {
+  return (
+    <nav className='navbar flex justify-between items-center'>
+      <Link to='/' className='text-2xl font-bold text-netflix-red'>Movie Magic Cinema</Link>
+      {/* Other nav links will be added later, e.g., Admin Login */}
+    </nav>
+  );
+};
+
+export default Navbar;

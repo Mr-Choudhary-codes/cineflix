@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Basic global styles */
+body {
+  @apply bg-netflix-dark text-white antialiased;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.container {
+  @apply max-w-screen-xl mx-auto px-4;
+}
+
+/* Example custom component style (can be done with @apply or directly in components) */
+.movie-grid {
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4;
+}
+
+.movie-card {
+  @apply bg-netflix-light-gray rounded-lg overflow-hidden shadow-lg transition-transform duration-200 ease-in-out hover:scale-105;
+}
+
+.movie-card img {
+  @apply w-full h-auto object-cover; /* Adjust height as needed, e.g., h-96 */
+}
+
+.movie-card h3 {
+  @apply text-lg font-semibold p-3;
+}
+
+.navbar {
+  @apply bg-transparent p-4 sticky top-0 z-50 transition-colors duration-300; /* Transparent initially */
+}
+
+.navbar-scrolled { /* Add this class on scroll */
+   @apply bg-netflix-dark;
+}
+
+
+.navbar a {
+  @apply text-white mr-4 hover:text-netflix-red;
+}
+
+.search-bar input {
+  @apply p-2 rounded bg-gray-700 text-white placeholder-gray-400;
+}
+.search-bar button {
+  @apply p-2 ml-2 bg-netflix-red text-white rounded hover:bg-red-700;
+}
+
+.watch-button {
+  @apply inline-block bg-netflix-red text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition-colors;
+}
+
+/* Basic styling for Admin Login Page for better visibility */
+.admin-login-page {
+  @apply flex flex-col items-center justify-center min-h-screen bg-gray-800;
+}
+
+.admin-login-page form {
+  @apply bg-netflix-light-gray p-8 rounded-lg shadow-xl w-full max-w-md;
+}
+
+.admin-login-page label {
+  @apply block text-gray-300 text-sm font-bold mb-2;
+}
+
+.admin-login-page input {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 bg-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4;
+}
+
+.admin-login-page button {
+  @apply bg-netflix-red hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full;
+}

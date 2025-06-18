@@ -1,0 +1,61 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Navbar from './components/Navbar'; // Assuming Navbar is in components
+
+// Placeholder Pages (will be created in a later step)
+import HomePage from './pages/HomePage';
+import MovieDetailPage from './pages/MovieDetailPage';
+import WatchPage from './pages/WatchPage';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
+
+// Placeholder for Auth Context or logic
+// For now, simulate isAdmin state. Replace with actual auth logic later.
+const useAuth = () => {
+  // In a real app, this would check localStorage/context for a valid admin token
+  // For demonstration, let's assume a way to toggle this or check a mock state.
+  // const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  // For now, let's default to false. Actual login will change this.
+  const isAdmin = false; // Replace with actual auth check
+  return { isAdmin };
+};
+
+const ProtectedAdminRoute = ({ children }) => {
+  const { isAdmin } = useAuth();
+  if (!isAdmin) {
+    // Redirect them to the /admin/login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the homepage.
+    return <Navigate to="/admin/login" replace />;
+  }
+  return children;
+};
+
+function App() {
+  return (
+    <Router>
+      <Navbar />
+      <div className="container"> {/* Optional: for consistent padding/layout */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movie/:id" element={<MovieDetailPage />} />
+          <Route path="/watch/:id" element={<WatchPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedAdminRoute>
+                <AdminDashboardPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          {/* Optional: Catch-all for 404 Not Found */}
+          <Route path="*" element={<div>404 Not Found</div>} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
